@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:very_good_coffee_app/features/coffee/data/models/coffee_model.dart';
 import 'package:very_good_coffee_app/features/coffee/domain/entities/coffee.dart';
 
 import '../../../../fixtures/fixture_reader.dart';
@@ -51,7 +52,7 @@ void main() {
       // Act
       final result = testCoffeeModel.copyWith(imageUrl: testImageUrl);
       // Assert
-      expect(result.email, equals(testImageUrl));
+      expect(result.imageUrl, equals(testImageUrl));
     });
   });
 }
