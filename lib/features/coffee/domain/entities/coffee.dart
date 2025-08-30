@@ -5,6 +5,9 @@ class Coffee extends Equatable {
     required this.imageUrl,
   });
 
+  /// Represents an empty [Coffe] instance.
+  ///
+  /// Used for default values or initializing empty states.
   const Coffee.empty()
     : this(
         imageUrl: '',
