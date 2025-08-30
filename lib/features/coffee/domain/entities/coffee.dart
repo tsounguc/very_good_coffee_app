@@ -5,6 +5,11 @@ class Coffee extends Equatable {
     required this.imageUrl,
   });
 
+  const Coffee.empty()
+    : this(
+        imageUrl: '',
+      );
+
   final String imageUrl;
 
   @override

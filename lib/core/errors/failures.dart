@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:very_good_coffee_app/core/errors/exceptions.dart';
 
 /// Base class for handling failures across the app.
 ///
@@ -30,4 +31,74 @@ abstract class Failure extends Equatable {
 
   @override
   List<Object?> get props => [message, statusCode];
+}
+
+/// **Base class for all Coffee failures**
+///
+/// This allows us to have specific failure types.
+abstract class CoffeeFailure extends Failure {
+  CoffeeFailure({
+    required super.message,
+    required super.statusCode,
+  });
+}
+
+/// **Failure that occurs when getting a random coffee.
+class GetRandomCoffeeFailure extends CoffeeFailure {
+  GetRandomCoffeeFailure({
+    required super.message,
+    required super.statusCode,
+  });
+
+  /// Converts a [GetRandomCoffeeException] into [GetRandomCoffeeFailure]
+  GetRandomCoffeeFailure.fromException(GetRandomCoffeeException exception)
+    : this(
+        message: exception.message,
+        statusCode: exception.statusCode,
+      );
+}
+
+/// **Failure that occurs when getting list of favorite coffee.
+class GetFavoritesFailure extends CoffeeFailure {
+  GetFavoritesFailure({
+    required super.message,
+    required super.statusCode,
+  });
+
+  /// Converts a [GetFavoritesException] into [GetFavoritesFailure]
+  GetFavoritesFailure.fromException(GetFavoritesException exception)
+    : this(
+        message: exception.message,
+        statusCode: exception.statusCode,
+      );
+}
+
+/// **Failure that occurs when saving a coffee to favorites.
+class SaveFavoriteFailure extends CoffeeFailure {
+  SaveFavoriteFailure({
+    required super.message,
+    required super.statusCode,
+  });
+
+  /// Converts a [SaveFavoriteException] into [SaveFavoriteFailure]
+  SaveFavoriteFailure.fromException(SaveFavoriteException exception)
+    : this(
+        message: exception.message,
+        statusCode: exception.statusCode,
+      );
+}
+
+/// **Failure that occurs when removing a coffee from favorites.
+class RemoveFavoriteFailure extends CoffeeFailure {
+  RemoveFavoriteFailure({
+    required super.message,
+    required super.statusCode,
+  });
+
+  /// Converts a [RemoveFavoriteException] into [RemoveFavoriteFailure]
+  RemoveFavoriteFailure.fromException(RemoveFavoriteException exception)
+    : this(
+        message: exception.message,
+        statusCode: exception.statusCode,
+      );
 }
