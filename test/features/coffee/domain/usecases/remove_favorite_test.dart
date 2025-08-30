@@ -4,6 +4,7 @@ import 'package:mocktail/mocktail.dart';
 import 'package:very_good_coffee_app/core/errors/failures.dart';
 import 'package:very_good_coffee_app/features/coffee/domain/entities/coffee.dart';
 import 'package:very_good_coffee_app/features/coffee/domain/repositories/coffee_repository.dart';
+import 'package:very_good_coffee_app/features/coffee/domain/usecases/remove_favorite.dart';
 
 import 'coffee_repository.mock.dart';
 

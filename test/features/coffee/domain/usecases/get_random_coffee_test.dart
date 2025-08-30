@@ -4,6 +4,7 @@ import 'package:mocktail/mocktail.dart';
 import 'package:very_good_coffee_app/core/errors/failures.dart';
 import 'package:very_good_coffee_app/features/coffee/domain/entities/coffee.dart';
 import 'package:very_good_coffee_app/features/coffee/domain/repositories/coffee_repository.dart';
+import 'package:very_good_coffee_app/features/coffee/domain/usecases/get_random_coffee.dart';
 
 import 'coffee_repository.mock.dart';
 
@@ -30,7 +31,7 @@ void main() {
       ).thenAnswer((_) async => const Right(testCoffee));
 
       // Act
-      final result = await useCase(testCoffee);
+      final result = await useCase();
 
       // Assert
       expect(result, const Right<Failure, Coffee>(testCoffee));
@@ -57,7 +58,7 @@ void main() {
       ).thenAnswer((_) async => Left(testFailure));
 
       // Act
-      final result = await useCase(testCoffee);
+      final result = await useCase();
 
       // Assert
       expect(result, Left<Failure, Coffee>(testFailure));
