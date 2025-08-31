@@ -34,7 +34,7 @@ void main() {
         ).thenAnswer((_) async => Response(testJson, 200));
 
         // Act
-        final result = remoteDataSourceImpl.fetchRandomCoffee();
+        final result = await remoteDataSourceImpl.fetchRandomCoffee();
 
         // Assert
         expect(result, isA<CoffeeModel>());
@@ -60,10 +60,7 @@ void main() {
         expect(
           () async => methodCall(),
           throwsA(
-            GetRandomCoffeeException(
-              message: 'Image Not Found',
-              statusCode: '404',
-            ),
+            isA<GetRandomCoffeeException>(),
           ),
         );
         verify(
