@@ -6,6 +6,7 @@ import 'package:very_good_coffee_app/core/errors/failures.dart';
 import 'package:very_good_coffee_app/features/coffee/data/data_sources/coffee_local_data_source.dart';
 import 'package:very_good_coffee_app/features/coffee/data/data_sources/coffee_remote_data_source.dart';
 import 'package:very_good_coffee_app/features/coffee/data/models/coffee_model.dart';
+import 'package:very_good_coffee_app/features/coffee/data/repositories/coffee_repository_impl.dart';
 import 'package:very_good_coffee_app/features/coffee/domain/entities/coffee.dart';
 import 'package:very_good_coffee_app/features/coffee/domain/repositories/coffee_repository.dart';
 
@@ -168,7 +169,7 @@ void main() {
         ).thenAnswer((_) => Future.value());
 
         // Act
-        final result = repositoryImpl.removeFavorite(testCoffee);
+        final result = await repositoryImpl.removeFavorite(testCoffee);
 
         // Assert
         expect(result, const Right<Failure, void>(null));
@@ -194,7 +195,7 @@ void main() {
         ).thenThrow(testException);
 
         // Act
-        final result = repositoryImpl.removeFavorite(testCoffee);
+        final result = await repositoryImpl.removeFavorite(testCoffee);
 
         // Assert
         expect(
@@ -223,7 +224,7 @@ void main() {
         ).thenAnswer((_) async => testFavorites);
 
         // Act
-        final result = repositoryImpl.getFavorites();
+        final result = await repositoryImpl.getFavorites();
 
         // Assert
         expect(
@@ -252,12 +253,14 @@ void main() {
         ).thenThrow(testException);
 
         // Act
-        final result = repositoryImpl.getFavorites();
+        final result = await repositoryImpl.getFavorites();
 
         // Assert
         expect(
           result,
-          GetFavoritesFailure.fromException(testException),
+          Left<Failure, List<Coffee>>(
+            GetFavoritesFailure.fromException(testException),
+          ),
         );
         verify(
           () => localDataSource.getFavorites(),
