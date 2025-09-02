@@ -24,7 +24,7 @@ A Flutter application that displays random coffee images from the [Coffee API](h
 - [Hive](https://pub.dev/packages/hive) for local persistence
 - [http](https://pub.dev/packages/http) for API calls
 - [get_it](https://pub.dev/packages/get_it) for dependency injection
-- [mocktail](https://pub.dev/packages/mocktail) and [flutter_test](https://api.flutter.dev/flutter/flutter_test/flutter_test-library.html) for testing
+- [mocktail](https://pub.dev/packages/mocktail), [bloc_test](https://pub.dev/packages/bloc_test), and [flutter_test](https://api.flutter.dev/flutter/flutter_test/flutter_test-library.html) for testing
 
 ---
 
