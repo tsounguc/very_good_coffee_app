@@ -19,7 +19,7 @@ void main() {
     registerFallbackValue(Uri());
   });
 
-  group('fetchRandomCoffee', () {
+  group('fetchRandomCoffee - ', () {
     final testJson = fixture('coffee.json');
     const url = 'https://coffee.alexflipnote.dev/random.json';
     test(
