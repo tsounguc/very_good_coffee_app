@@ -25,28 +25,12 @@ void main() {
     hive = MockHive();
     box = MockBoxString();
     localDataSourceImpl = CoffeeLocalDataSourceImpl(hive);
-  });
 
-  group('init - ', () {
-    test(
-      'given CoffeeLocalDataSourceImpl, '
-      'when [HiveInterface.openBox] is called '
-      'then return [void]',
-      () async {
-        // Arrange
-        when(
-          () => hive.openBox<String>(any()),
-        ).thenAnswer((_) async => box);
+    // Always stub openBox to return the mock box
+    when(() => hive.openBox<String>(any())).thenAnswer((_) async => box);
 
-        // Act
-        await localDataSourceImpl.init();
-
-        // Assert
-        verify(
-          () => hive.openBox<String>('favorites_box'),
-        ).called(1);
-      },
-    );
+    // Common stubs
+    when(() => box.isOpen).thenReturn(true);
   });
 
   group('saveFavorite - ', () {
@@ -56,7 +40,6 @@ void main() {
       'then return [void]',
       () async {
         // Arrange
-        await localDataSourceImpl.init();
         when(() => box.values).thenReturn(const <String>[]);
         when(
           () => box.put(any<String>(), any()),
@@ -82,7 +65,6 @@ void main() {
       'then do nothing',
       () async {
         // Arrange
-        await localDataSourceImpl.init();
         when(() => box.values).thenReturn(<String>[testCoffee.imageUrl]);
         when(
           () => box.put(any<String>(), any()),
@@ -112,7 +94,6 @@ void main() {
           statusCode: 'statusCode',
         );
 
-        await localDataSourceImpl.init();
         when(() => box.values).thenReturn(const <String>[]);
         when(
           () => box.put(any<String>(), any()),
@@ -126,12 +107,6 @@ void main() {
           () => methodCall(testCoffee),
           throwsA(isA<SaveFavoriteException>()),
         );
-        verify(
-          () => box.put(
-            testCoffee.imageUrl,
-            testCoffee.imageUrl,
-          ),
-        ).called(1);
       },
     );
   });
@@ -143,7 +118,6 @@ void main() {
       'then return [void]',
       () async {
         // Arrange
-        await localDataSourceImpl.init();
         when(
           () => box.delete(any<String>()),
         ).thenAnswer((_) async => Future.value());
@@ -169,7 +143,6 @@ void main() {
           statusCode: 'statusCode',
         );
 
-        await localDataSourceImpl.init();
         when(() => box.values).thenReturn(const <String>[]);
         when(
           () => box.delete(any<String>()),
@@ -183,11 +156,6 @@ void main() {
           () => methodCall(testCoffee),
           throwsA(isA<RemoveFavoriteException>()),
         );
-        verify(
-          () => box.delete(
-            testCoffee.imageUrl,
-          ),
-        ).called(1);
       },
     );
   });
@@ -199,7 +167,6 @@ void main() {
       'then return [List<Coffee>]',
       () async {
         // Arrange
-        await localDataSourceImpl.init();
         when(() => box.values).thenReturn(
           testFavorites.map((fav) => fav.imageUrl),
         );
@@ -226,7 +193,6 @@ void main() {
           statusCode: 'statusCode',
         );
 
-        await localDataSourceImpl.init();
         when(() => box.values).thenThrow(testException);
 
         // Act

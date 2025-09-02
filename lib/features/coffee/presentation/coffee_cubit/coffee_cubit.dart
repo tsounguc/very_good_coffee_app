@@ -18,12 +18,11 @@ class CoffeeCubit extends Cubit<CoffeeState> {
   final SaveFavorite _saveFavorite;
 
   Future<void> save(Coffee coffee) async {
-    emit(const CoffeeLoading());
     final result = await _saveFavorite(coffee);
 
     result.fold(
       (failure) => emit(CoffeeError(failure.message)),
-      (success) => emit(const CoffeeSaved()),
+      (success) => emit(RandomCoffeeLoaded(coffee)),
     );
   }
 

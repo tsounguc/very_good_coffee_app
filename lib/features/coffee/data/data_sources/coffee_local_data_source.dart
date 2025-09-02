@@ -5,7 +5,6 @@ import 'package:very_good_coffee_app/features/coffee/data/models/coffee_model.da
 import 'package:very_good_coffee_app/features/coffee/domain/entities/coffee.dart';
 
 abstract class CoffeeLocalDataSource {
-  Future<void> init();
   Future<List<CoffeeModel>> getFavorites();
   Future<void> saveFavorite(Coffee coffee);
   Future<void> removeFavorite(Coffee coffee);
@@ -18,8 +17,8 @@ class CoffeeLocalDataSourceImpl implements CoffeeLocalDataSource {
   static const boxName = 'favorites_box';
   Box<String>? _box;
 
-  @override
-  Future<void> init() async {
+  Future<void> _init() async {
+    if (true == _box?.isOpen) return;
     _box = await hive.openBox(boxName);
   }
 
@@ -33,6 +32,7 @@ class CoffeeLocalDataSourceImpl implements CoffeeLocalDataSource {
 
   @override
   Future<void> saveFavorite(Coffee coffee) async {
+    await _init();
     try {
       if (!box.values.contains(coffee.imageUrl)) {
         await box.put(
@@ -51,6 +51,7 @@ class CoffeeLocalDataSourceImpl implements CoffeeLocalDataSource {
 
   @override
   Future<void> removeFavorite(Coffee coffee) async {
+    await _init();
     try {
       await box.delete(coffee.imageUrl);
     } catch (e, s) {
@@ -65,6 +66,7 @@ class CoffeeLocalDataSourceImpl implements CoffeeLocalDataSource {
   @override
   Future<List<CoffeeModel>> getFavorites() async {
     try {
+      await _init();
       return box.values
           .map(
             (value) => CoffeeModel(imageUrl: value),
