@@ -46,7 +46,10 @@ void main() {
     );
 
     test(
-      'given CoffeeRemoteDataSourceImpl, ',
+      'given CoffeeRemoteDataSourceImpl, '
+      'when [Client.get] is called '
+      'and status is not 200 '
+      'then throw [GetRandomCoffeeException]',
       () async {
         // Arrange
         when(
