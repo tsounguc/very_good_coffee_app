@@ -63,6 +63,7 @@ flutter doctor
 ### 2. Clone the Repository
 
 git clone https://github.com/tsounguc/very_good_coffee_app.git
+
 cd very_good_coffee_app
 
 ### 3. Install Dependencies
