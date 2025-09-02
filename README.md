@@ -31,6 +31,7 @@ A Flutter application that displays random coffee images from the [Coffee API](h
 ## 📂 Project Structure
 
 ib/ 
+
 ┣ core/ # Errors, utils, typedefs, Service locator setup (get_it)
 
 ┣ features/coffee/ 
