@@ -4,7 +4,7 @@ A Flutter application that displays random coffee images from the [Coffee API](h
 
 ---
 
-## ✨ Features
+## Features
 
 - Fetch a random coffee image from the API
 - Refresh to load a new image
@@ -16,7 +16,7 @@ A Flutter application that displays random coffee images from the [Coffee API](h
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - [Flutter](https://flutter.dev) (stable channel)
 - [BLoC / Cubit](https://bloclibrary.dev) for state management
@@ -28,7 +28,7 @@ A Flutter application that displays random coffee images from the [Coffee API](h
 
 ---
 
-## 📂 Project Structure
+## Project Structure
 
 ib/ 
 
@@ -47,7 +47,7 @@ ib/
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### 1. Prerequisites
 
