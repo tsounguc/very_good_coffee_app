@@ -32,10 +32,15 @@ A Flutter application that displays random coffee images from the [Coffee API](h
 
 ib/ 
 ┣ core/ # Errors, utils, typedefs, Service locator setup (get_it)
+
 ┣ features/coffee/ 
+
 ┃ ┣ data/ # Data sources, repositories, models 
+
 ┃ ┣ domain/ # Entities, repositories, usecases 
+
 ┃ ┣ presentation/ # Cubits, UI (pages & widgets)
+
 ┗ main.dart # App entrypoint
 
 
