@@ -25,7 +25,10 @@ final class CoffeeError extends CoffeeState {
 }
 
 final class CoffeeSaved extends CoffeeState {
-  const CoffeeSaved();
+  const CoffeeSaved(this.coffee);
+  final Coffee coffee;
+  @override
+  List<Object> get props => [coffee];
 }
 
 final class RandomCoffeeLoaded extends CoffeeState {

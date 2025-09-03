@@ -18,11 +18,13 @@ class FavoritesCubit extends Cubit<FavoritesState> {
   final GetFavorites _getFavorites;
 
   Future<void> remove(Coffee coffee) async {
-    emit(const FavoritesLoading());
     final result = await _removeFavorite(coffee);
 
     result.fold(
-      (failure) => emit(FavoritesError(failure.message)),
+      (failure) {
+        addOptimistic(coffee);
+        emit(FavoritesError(failure.message));
+      },
       (success) => emit(const FavoriteRemoved()),
     );
   }
@@ -35,5 +37,23 @@ class FavoritesCubit extends Cubit<FavoritesState> {
       (failure) => emit(FavoritesError(failure.message)),
       (favorites) => emit(FavoritesLoaded(favorites)),
     );
+  }
+
+  void addOptimistic(Coffee coffee) {
+    final s = state;
+    if (s is FavoritesLoaded && !s.favorites.contains(coffee)) {
+      emit(FavoritesLoaded([...s.favorites, coffee]));
+    }
+  }
+
+  void removeOptimistic(Coffee coffee) {
+    final s = state;
+    if (s is FavoritesLoaded) {
+      emit(
+        FavoritesLoaded(
+          s.favorites.where((c) => c != coffee).toList(growable: false),
+        ),
+      );
+    }
   }
 }

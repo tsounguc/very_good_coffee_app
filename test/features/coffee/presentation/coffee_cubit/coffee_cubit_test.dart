@@ -58,7 +58,7 @@ void main() {
       act: (cubit) => cubit.save(testCoffee),
       expect: () => [
         const CoffeeLoading(),
-        const CoffeeSaved(),
+        const CoffeeSaved(testCoffee),
       ],
       verify: (_) {
         verify(

@@ -22,7 +22,10 @@ class CoffeeCubit extends Cubit<CoffeeState> {
 
     result.fold(
       (failure) => emit(CoffeeError(failure.message)),
-      (success) => emit(RandomCoffeeLoaded(coffee)),
+      (success) {
+        emit(CoffeeSaved(coffee));
+        emit(RandomCoffeeLoaded(coffee));
+      },
     );
   }
 
